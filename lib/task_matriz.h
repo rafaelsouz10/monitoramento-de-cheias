@@ -108,69 +108,56 @@ void print_sprite(int matriz[5][5][3]) {
 
 // TASK DA MATRIZ RGB
 void vMatrizTask(void *params) {
-    npInit(LED_PIN);
-    bool piscar = true;
-    sensor_data_t dados;
+  npInit(LED_PIN);
+  bool piscar = true;
+  sensor_data_t dados;
 
-    // Símbolos fixos
-    const int exclama[] = {23, 18, 13, 3}; // Alerta geral
+  const int exclama[] = {22, 17, 12, 2};
+  const int gota[] = {22, 18, 17, 16, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 3, 2, 1};
+  const int copo[][4] = {{3, 2, 1}, {8, 7, 6}, {13, 12, 11}, {18, 17, 16}};
+  const int copo_frames = 3;
+  static int frame_copo = 0;
 
-    const int gota[] = {                     // Alerta por chuva
-                22,
-            18, 17, 16,
-        14, 13, 12, 11, 10,
-          9, 8, 7, 6, 5,
-            3, 2, 1
-    };
+  while (true) {
+    if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
+      npClear();
 
-    const int copo[][3] = {                  // Alerta por nível de água
-        {3, 2, 1},
-        {8, 7, 6},
-        {13, 12, 11}
-    };
-    const int copo_frames = 3;
-    static int frame_copo = 0;
-
-    while (1) {
-        if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
-            npClear();
-
-            if (dados.alerta) {
-                if (dados.nivel_agua_pct >= 70 && dados.volume_chuva_pct >= 80) {
-                    // ALERTA GERAL: Exclamação piscando (250ms)
-                    if (piscar) {
-                        for (int i = 0; i < sizeof(exclama) / sizeof(int); i++)
-                            npSetLED(exclama[i], 255, 0, 0); // Vermelho
-                    }
-                    piscar = !piscar;
-                }
-                else if (dados.nivel_agua_pct >= 70) {
-                    // ALERTA por Nível: copo enchendo (200ms)
-                    for (int f = 0; f <= frame_copo; f++) {
-                        for (int i = 0; i < 3; i++) {
-                            npSetLED(copo[f][i], 0, 255, 255); // Ciano
-                        }
-                    }
-                    frame_copo = (frame_copo + 1) % (copo_frames + 1);
-                }
-                else if (dados.volume_chuva_pct >= 80) {
-                    // ALERTA por Chuva: gota piscando (150ms)
-                    if (piscar) {
-                        for (int i = 0; i < sizeof(gota) / sizeof(int); i++)
-                            npSetLED(gota[i], 0, 0, 255); // Azul
-                    }
-                    piscar = !piscar;
-                }
-            } else {
-                // Sem alerta: tudo apagado
-                frame_copo = 0;
-                piscar = true;
-                
+      if (dados.alerta) {
+        if (dados.nivel_agua_pct >= 70 && dados.volume_chuva_pct >= 80) {
+          // Exclamação piscando
+          if (piscar) {
+            for (int i = 0; i < sizeof(exclama) / sizeof(int); i++) {
+              npSetLED(exclama[i], 255, 0, 0);
             }
-            npWrite();
-            vTaskDelay(pdMS_TO_TICKS(100));
+          }
         }
+        else if (dados.nivel_agua_pct >= 70) {
+          // Copo enchendo (acumulativo)
+          for (int f = 0; f <= frame_copo; f++) {
+            for (int i = 0; i < 3; i++) {
+                npSetLED(copo[f][i], 0, 255, 255);
+            }
+          }
+          frame_copo = (frame_copo + 1) % (copo_frames + 1);
+        }
+        else if (dados.volume_chuva_pct >= 80) {
+          // Gota piscando
+          if (piscar) {
+            for (int i = 0; i < sizeof(gota) / sizeof(int); i++) {
+                npSetLED(gota[i], 0, 0, 255);
+            }
+          }
+        }
+      } else {
+        frame_copo = 0;
+        piscar = true;
+      }
+      npWrite();
     }
+
+    vTaskDelay(pdMS_TO_TICKS(200)); // Delay global mais fluido
+    piscar = !piscar; // Piscar de forma contínua
+  }
 }
 
 

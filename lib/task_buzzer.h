@@ -47,7 +47,7 @@ void vAlarmeTask() {
                 // ALERTA GERAL → som rápido e insistente
                 if (dados.nivel_agua_pct >= 70 && dados.volume_chuva_pct >= 80) {
                     buzzer_start_alarm();
-                    vTaskDelay(pdMS_TO_TICKS(200));
+                    vTaskDelay(pdMS_TO_TICKS(100));
                     buzzer_stop_alarm();
                     vTaskDelay(pdMS_TO_TICKS(50));
                 }

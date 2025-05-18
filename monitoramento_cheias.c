@@ -39,10 +39,10 @@ int main() {
 
     // Criação das Tasks
     xTaskCreate(vSensoresTask, "Sensores", 256, NULL, 1, NULL);
-    xTaskCreate(vDisplayTask, "Display", 512, NULL, 2, NULL);
-    xTaskCreate(vLedRGBTask, "RGB", 256, NULL, 2, NULL);
+    xTaskCreate(vDisplayTask, "Display", 512, NULL, 1, NULL);
+    xTaskCreate(vLedRGBTask, "RGB", 256, NULL, 1, NULL);
     xTaskCreate(vAlarmeTask, "Alarme", 256, NULL, 1, NULL);
-    xTaskCreate(vMatrizTask, "Matriz", 512, NULL, 2, NULL);
+    xTaskCreate(vMatrizTask, "Matriz", 512, NULL, 1, NULL);
 
     vTaskStartScheduler();
 }
