@@ -111,9 +111,9 @@ Cada parâmetro é lido a partir dos eixos de um **joystick** e convertido em **
 
     Ativado se:
 
-        - **Nível da água ≥ 70%**
+        - Nível da água ≥ 70%
 
-        - **Volume de chuva ≥ 80%**
+        - Volume de chuva ≥ 80%
 
     Neste modo:
 
