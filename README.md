@@ -35,7 +35,6 @@ Certifique-se de que o SDK do Raspberry Pi Pico está configurado corretamente n
 
 - **C/C++** (Microsoft).
 - **CMake Tools**.
-- **Wokwi Simulator**.
 - **Raspberry Pi Pico**.
 
 ---
