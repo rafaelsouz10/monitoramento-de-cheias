@@ -42,6 +42,7 @@ void vAlarmeTask() {
     sensor_data_t dados;
 
     while (true) {
+        // Recebe da fila e armazena em 'dados' assim que houver novo valor disponível
         if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
             if (dados.alerta) {
                 // ALERTA GERAL → som rápido e insistente

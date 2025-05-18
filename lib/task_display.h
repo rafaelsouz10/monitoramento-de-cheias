@@ -42,6 +42,7 @@ void vDisplayTask(){
 
     while (true) {
 
+        // Recebe da fila e armazena em 'dados' assim que houver novo valor disponível
         if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
             // Formata strings
             snprintf(linha1, sizeof(linha1), "Nivel Agua: %2u%%", dados.nivel_agua_pct);

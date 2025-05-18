@@ -119,6 +119,7 @@ void vMatrizTask(void *params) {
   static int frame_copo = 0;
 
   while (true) {
+    // Recebe da fila e armazena em 'dados' assim que houver novo valor disponível
     if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
       npClear();
 

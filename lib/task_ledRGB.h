@@ -13,6 +13,7 @@ void vLedRGBTask(void *params) {
     sensor_data_t dados;
 
     while (true) {
+        // Recebe da fila e armazena em 'dados' assim que houver novo valor disponível
         if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
             if (dados.alerta) {
                 gpio_put(LED_VERDE, 0); gpio_put(LED_VERMELHO, 1);   // Liga vermelho
