@@ -11,7 +11,6 @@ sistema embarcado multitarefa, baseado em FreeRTOS, para monitoramento do nível
 
 - **Microcontrolador**: Raspberry Pi Pico ou Raspberry Pi Pico W (opcional)
 - **Placa de Desenvolvimento:** BitDogLab (opcional).
-- **Conta Criada no Wokwi Simulator**: [Wokwi](https://wokwi.com/).
 - **Editor de Código**: Visual Studio Code (VS Code).
 - **SDK do Raspberry Pi Pico** configurado no sistema.
 - Ferramentas de build: **CMake** e **Ninja**.
