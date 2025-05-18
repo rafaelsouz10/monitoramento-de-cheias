@@ -13,11 +13,11 @@ void vSensoresTask(void *params) {
 
     while (true) {
         // Lê nível da água (X)
-        adc_select_input(0);  // ADC0
+        adc_select_input(1);  // ADC0
         uint16_t valor_agua = adc_read();
 
         // Lê volume de chuva (Y)
-        adc_select_input(1);  // ADC1
+        adc_select_input(0);  // ADC1
         uint16_t valor_chuva = adc_read();
 
         // Converte para porcentagem
