@@ -49,17 +49,7 @@ Abra o projeto no Visual Studio Code e siga as etapas abaixo:
 
 ---
 
-### 4. Teste no Simulador Wokwi Integrado ao VS Code
-
-Após ter configurado o VS Code conforme descrito no item 3, siga os passos abaixo para simular o projeto:
-
-1. Abra o arquivo `diagram.json` no Visual Studio Code.
-2. Clique no botão "Play" disponível na interface.
-3. Divirta-se interagindo com os componentes disponíveis no simulador integrado!
-
----
-
-### 5. Teste no Hardware Real
+### 4. Teste no Hardware Real
 
 #### Utilizando a Placa de Desenvolvimento BitDogLab com Raspberry Pi Pico W:
 
@@ -75,7 +65,7 @@ Após ter configurado o VS Code conforme descrito no item 3, siga os passos abai
 
 ---
 
-### 🔌 6. Conexões e Esquemático
+### 🔌 5. Conexões e Esquemático
 Abaixo está o mapeamento de conexões entre os componentes e a Raspberry Pi Pico W:
 
 | **Componentes**        | **Pino Conectado (GPIO)** |
@@ -101,7 +91,7 @@ Abaixo está o mapeamento de conexões entre os componentes e a Raspberry Pi Pic
 
 ---
 
-### 7. Funcionamento do Sistema
+### 6. Funcionamento do Sistema
 
 #### 📌 Funcionalidades
 
@@ -141,6 +131,6 @@ Cada parâmetro é lido a partir dos eixos de um **joystick** e convertido em **
 
 ---
 
-### 8. Vídeos Demonstrativo
+### 7. Vídeos Demonstrativo
 
 **Click [AQUI](LINK DO VÍDEO) para acessar o link do Vídeo Ensaio**
