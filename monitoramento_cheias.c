@@ -22,6 +22,7 @@ QueueHandle_t xQueueSensorData;
 #include "lib/task_ledRGB.h"
 #include "lib/task_buzzer.h"
 #include "lib/task_display.h"
+#include "lib/task_matriz.h"
 
 int main() {
     bootsel_btn_callback(); // Para ser utilizado o modo BOOTSEL com botão B
@@ -38,10 +39,10 @@ int main() {
 
     // Criação das Tasks
     xTaskCreate(vSensoresTask, "Sensores", 256, NULL, 1, NULL);
-    xTaskCreate(vDisplayTask, "Display", 512, NULL, 1, NULL);
-    xTaskCreate(vLedRGBTask, "RGB", 256, NULL, 1, NULL);
+    xTaskCreate(vDisplayTask, "Display", 512, NULL, 2, NULL);
+    xTaskCreate(vLedRGBTask, "RGB", 256, NULL, 2, NULL);
     xTaskCreate(vAlarmeTask, "Alarme", 256, NULL, 1, NULL);
-
+    xTaskCreate(vMatrizTask, "Matriz", 512, NULL, 2, NULL);
 
     vTaskStartScheduler();
 }

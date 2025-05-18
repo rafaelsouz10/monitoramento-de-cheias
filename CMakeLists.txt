@@ -45,6 +45,9 @@ add_executable(monitoramento_cheias
     lib/ssd1306/ssd1306.c # Biblioteca para o display OLED
 )
 
+# Generate PIO header
+pico_generate_pio_header(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/ws2818b.pio)
+
 pico_set_program_name(monitoramento_cheias "monitoramento_cheias")
 pico_set_program_version(monitoramento_cheias "0.1")
 
@@ -69,6 +72,7 @@ target_link_libraries(${PROJECT_NAME}
     hardware_adc
     FreeRTOS-Kernel 
     FreeRTOS-Kernel-Heap4
+    hardware_pio
 )
 
 pico_add_extra_outputs(monitoramento_cheias)

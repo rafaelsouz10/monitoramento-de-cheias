@@ -54,7 +54,6 @@ void vDisplayTask(){
             ssd1306_draw_string(&ssd, linha3, 0, 45);
             ssd1306_send_data(&ssd); // Envia os dados para o display
         }
-        vTaskDelay(pdMS_TO_TICKS(100)); // Delay para evitar flicker
     }
 }
 

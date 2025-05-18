@@ -45,13 +45,12 @@ void vAlarmeTask() {
         if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
             if (dados.alerta) {
                 // Bip intermitente: Liga, espera, desliga, espera
-                buzzer_start_alarm();
-                vTaskDelay(pdMS_TO_TICKS(200));
-                buzzer_stop_alarm();
-                vTaskDelay(pdMS_TO_TICKS(300));
-            } else {
+                // buzzer_start_alarm();
+                vTaskDelay(pdMS_TO_TICKS(150));
                 buzzer_stop_alarm();
                 vTaskDelay(pdMS_TO_TICKS(100));
+            } else {
+                buzzer_stop_alarm();
             }
         }
         vTaskDelay(pdMS_TO_TICKS(50));

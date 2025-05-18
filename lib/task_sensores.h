@@ -33,7 +33,7 @@ void vSensoresTask(void *params) {
         // Envia para fila
         xQueueSend(xQueueSensorData, &dados, portMAX_DELAY);
 
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(300));
     }
 }
 

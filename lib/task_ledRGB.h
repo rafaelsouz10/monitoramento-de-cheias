@@ -20,7 +20,6 @@ void vLedRGBTask(void *params) {
                 gpio_put(LED_VERMELHO, 0); gpio_put(LED_VERDE, 1);      // Liga verde
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 
