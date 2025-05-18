@@ -44,16 +44,38 @@ void vAlarmeTask() {
     while (true) {
         if (xQueueReceive(xQueueSensorData, &dados, portMAX_DELAY) == pdTRUE) {
             if (dados.alerta) {
-                // Bip intermitente: Liga, espera, desliga, espera
-                // buzzer_start_alarm();
-                vTaskDelay(pdMS_TO_TICKS(150));
-                buzzer_stop_alarm();
-                vTaskDelay(pdMS_TO_TICKS(100));
+                // ALERTA GERAL → som rápido e insistente
+                if (dados.nivel_agua_pct >= 70 && dados.volume_chuva_pct >= 80) {
+                    buzzer_start_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(200));
+                    buzzer_stop_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(50));
+                }
+                // ALERTA POR NÍVEL → bip curto repetido
+                else if (dados.nivel_agua_pct >= 70) {
+                    buzzer_start_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(200));
+                    buzzer_stop_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(200));
+                }
+                // ALERTA POR CHUVA → dois bips super curtos
+                else if (dados.volume_chuva_pct >= 80) {
+                    buzzer_start_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(100));
+                    buzzer_stop_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(100));
+                    buzzer_start_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(100));
+                    buzzer_stop_alarm();
+                    vTaskDelay(pdMS_TO_TICKS(300));
+                }
             } else {
                 buzzer_stop_alarm();
+                vTaskDelay(pdMS_TO_TICKS(250));
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(50));
+
+        vTaskDelay(pdMS_TO_TICKS(30)); // Task mais ágil
     }
 }
 
